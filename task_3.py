@@ -29,8 +29,8 @@ class TotalPoints(PointsForPlace, PointsForMeters):
         super().__init__()
 
     def get_total_points(self, place, meters):
-        total = super().get_points_for_place(place) + super().get_points_for_meters(meters)
-        return int(total)
+        total = super().get_points_for_place(int(place)) + super().get_points_for_meters(int(meters))
+        return total
 
 
 points_for_place = PointsForPlace()
@@ -43,3 +43,8 @@ total_points = TotalPoints()
 print(total_points.get_points_for_place(10))
 print(total_points.get_points_for_meters(10))
 print(total_points.get_total_points(100, 10))
+
+# проверка, что один или оба метода могут вернуть строку вместо числа
+print(total_points.get_total_points('100', 10))
+print(total_points.get_total_points(100, '10'))
+print(total_points.get_total_points('100', '10'))
