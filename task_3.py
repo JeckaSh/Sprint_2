@@ -4,32 +4,43 @@ class PointsForPlace:
 
     def get_points_for_place(self, place):
         if place > 100:
-            return 'Баллы начисляются только первым 100 участникам'
+            print("Баллы начисляются только первым 100 участникам")
+            place = int(input("Введите корректное количество баллов (от 1 до 100): "))
+            self.points = 101 - place
+            return self.points
         elif place < 1:
-            return 'Спортсмен не может занять нулевое или отрицательное место'
+            print("Спортсмен не может занять нулевое или отрицательное место")
+            place = int(input("Введите корректное количество баллов (от 1 до 100): "))
+            self.points = 101 - place
+            return self.points
         else:
             self.points = 101 - place
-            return int(self.points)
+            return self.points
 
 
 class PointsForMeters:
     def __init__(self):
         self.points = 0
-        
+
     def get_points_for_meters(self, meters):
-        if meters < 0:
-            return 'Количество метров не может быть отрицательным'
+        if meters < 1:
+            print("Количество метров не может быть нулевым или отрицательным")
+            meters = int(input("Введите количество метров (Больше 0): "))
+            self.points = meters * 0.5
+            return self.points
         else:
             self.points = meters * 0.5
-            return int(self.points)
-            
+            return self.points
+
 
 class TotalPoints(PointsForPlace, PointsForMeters):
     def __init__(self):
         super().__init__()
 
     def get_total_points(self, place, meters):
-        total = super().get_points_for_place(int(place)) + super().get_points_for_meters(int(meters))
+        total = super().get_points_for_place(
+            int(place)
+        ) + super().get_points_for_meters(int(meters))
         return total
 
 
@@ -44,7 +55,5 @@ print(total_points.get_points_for_place(10))
 print(total_points.get_points_for_meters(10))
 print(total_points.get_total_points(100, 10))
 
-# проверка, что один или оба метода могут вернуть строку вместо числа
-print(total_points.get_total_points('100', 10))
-print(total_points.get_total_points(100, '10'))
-print(total_points.get_total_points('100', '10'))
+# проверка на ввод некорректных данных
+print(total_points.get_total_points(101, 0))
