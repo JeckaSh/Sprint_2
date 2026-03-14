@@ -5,13 +5,9 @@ class PointsForPlace:
     def get_points_for_place(self, place):
         if place > 100:
             print("Баллы начисляются только первым 100 участникам")
-            place = int(input("Введите корректное количество баллов (от 1 до 100): "))
-            self.points = 101 - place
             return self.points
         elif place < 1:
             print("Спортсмен не может занять нулевое или отрицательное место")
-            place = int(input("Введите корректное количество баллов (от 1 до 100): "))
-            self.points = 101 - place
             return self.points
         else:
             self.points = 101 - place
@@ -25,8 +21,6 @@ class PointsForMeters:
     def get_points_for_meters(self, meters):
         if meters < 1:
             print("Количество метров не может быть нулевым или отрицательным")
-            meters = int(input("Введите количество метров (Больше 0): "))
-            self.points = meters * 0.5
             return self.points
         else:
             self.points = meters * 0.5
@@ -54,6 +48,3 @@ total_points = TotalPoints()
 print(total_points.get_points_for_place(10))
 print(total_points.get_points_for_meters(10))
 print(total_points.get_total_points(100, 10))
-
-# проверка на ввод некорректных данных
-print(total_points.get_total_points(101, 0))
